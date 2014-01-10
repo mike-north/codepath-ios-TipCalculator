@@ -41,6 +41,17 @@
     [self updateValues];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
 
+    
+    // get user preferences
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    // Get the default tip (by segment index). I checked to make sure
+    // that if the user hasn't set a default, we get 0 (a reasonable value)
+    int defaultTipIdx = [defaults integerForKey:@"default_tip"];
+    
+    // Apply the value we got from preferences to the segmented control
+    self.tipControl.selectedSegmentIndex = defaultTipIdx;
+
     // Do any additional setup after loading the view from its nib.
 }
 
